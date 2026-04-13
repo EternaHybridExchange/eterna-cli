@@ -27,7 +27,12 @@ export function getAuthIssuer(): string {
 }
 
 export function getMcpEndpoint(): string {
-  return process.env.ETERNA_MCP_URL ?? DEFAULT_MCP_ENDPOINT;
+  if (process.env.ETERNA_MCP_URL) return process.env.ETERNA_MCP_URL;
+  // Derive from ETERNA_ENDPOINT so staging users don't need a separate var.
+  // https://ai-api.eterna.exchange → https://mcp.eterna.exchange
+  // https://ai-api.staging.eterna.exchange → https://mcp.staging.eterna.exchange
+  const endpoint = process.env.ETERNA_ENDPOINT ?? DEFAULT_ENDPOINT;
+  return endpoint.replace("ai-api.", "mcp.");
 }
 
 function ensureConfigDir(): void {
