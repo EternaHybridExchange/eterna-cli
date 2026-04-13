@@ -1,13 +1,6 @@
-// src/commands/login.ts
 import { Command } from "commander";
-import open from "open";
 import { detectAuthFlow } from "../auth/detect.js";
-import {
-  localhostAuthFlow,
-  buildAuthorizationUrl,
-  generateCodeVerifier,
-  computeCodeChallenge,
-} from "../auth/localhost-flow.js";
+import { localhostAuthFlow } from "../auth/localhost-flow.js";
 import { deviceCodeFlow } from "../auth/device-flow.js";
 import { TokenManager } from "../auth/token-manager.js";
 import { readConfig } from "../auth/config.js";
@@ -46,13 +39,6 @@ async function loginWithLocalhost(
   const spinner = startSpinner("Opening browser for authentication...");
 
   try {
-    const { randomBytes } = await import("node:crypto");
-    const codeVerifier = generateCodeVerifier();
-    const codeChallenge = await computeCodeChallenge(codeVerifier);
-    const state = randomBytes(16).toString("hex");
-    const authUrl = buildAuthorizationUrl(codeChallenge, state, resource);
-
-    await open(authUrl);
     stopSpinner(undefined);
     console.log("Waiting for authorization in browser...\n");
 

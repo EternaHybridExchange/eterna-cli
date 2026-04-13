@@ -4,6 +4,7 @@ import {
   type ServerResponse,
 } from "node:http";
 import { randomBytes, createHash } from "node:crypto";
+import open from "open";
 import { getAuthIssuer } from "./config.js";
 
 const CLIENT_ID = "eterna-cli";
@@ -28,6 +29,25 @@ interface TokenResponse {
   scope: string;
 }
 
+function buildAuthorizationUrl(
+  codeChallenge: string,
+  state: string,
+  resource: string,
+): string {
+  const issuer = getAuthIssuer();
+  const params = new URLSearchParams({
+    response_type: "code",
+    client_id: CLIENT_ID,
+    redirect_uri: REDIRECT_URI,
+    scope: SCOPE,
+    state,
+    code_challenge: codeChallenge,
+    code_challenge_method: "S256",
+    resource,
+  });
+  return `${issuer}/oauth/authorize?${params.toString()}`;
+}
+
 export async function localhostAuthFlow(
   resource: string,
 ): Promise<TokenResponse> {
@@ -35,6 +55,9 @@ export async function localhostAuthFlow(
   const codeVerifier = generateCodeVerifier();
   const codeChallenge = await computeCodeChallenge(codeVerifier);
   const state = randomBytes(16).toString("hex");
+
+  // Build auth URL and start callback server before opening browser
+  const authUrl = buildAuthorizationUrl(codeChallenge, state, resource);
 
   const { code, receivedState } = await new Promise<{
     code: string;
@@ -76,7 +99,11 @@ export async function localhostAuthFlow(
     });
 
     server.listen(CALLBACK_PORT, "127.0.0.1", () => {
-      // Server ready
+      // Server ready — open browser with the same PKCE state
+      open(authUrl).catch(() => {
+        server.close();
+        reject(new Error("Failed to open browser"));
+      });
     });
 
     setTimeout(() => {
@@ -113,23 +140,4 @@ export async function localhostAuthFlow(
   }
 
   return tokenRes.json() as Promise<TokenResponse>;
-}
-
-export function buildAuthorizationUrl(
-  codeChallenge: string,
-  state: string,
-  resource: string,
-): string {
-  const issuer = getAuthIssuer();
-  const params = new URLSearchParams({
-    response_type: "code",
-    client_id: CLIENT_ID,
-    redirect_uri: REDIRECT_URI,
-    scope: SCOPE,
-    state,
-    code_challenge: codeChallenge,
-    code_challenge_method: "S256",
-    resource,
-  });
-  return `${issuer}/oauth/authorize?${params.toString()}`;
 }

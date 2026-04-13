@@ -65,7 +65,7 @@ Config is stored in `~/.eterna/config.json`:
 }
 ```
 
-Override the API endpoint with `ETERNA_API_ENDPOINT` environment variable.
+Override the config directory with the `ETERNA_CONFIG_DIR` environment variable.
 
 ## License
 

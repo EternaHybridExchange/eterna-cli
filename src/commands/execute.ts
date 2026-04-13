@@ -4,7 +4,7 @@ import { ApiClient } from "../api/client.js";
 import { startSpinner, stopSpinner } from "../util/spinner.js";
 import { formatExecutionResult } from "../util/format.js";
 
-export async function readCodeFromFile(filePath: string): Promise<string> {
+export function readCodeFromFile(filePath: string): string {
   if (!fs.existsSync(filePath)) {
     throw new Error(`File not found: ${filePath}`);
   }
