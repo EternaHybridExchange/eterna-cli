@@ -4,6 +4,7 @@ import * as os from "node:os";
 
 const DEFAULT_ENDPOINT = "https://ai-api.eterna.exchange";
 const AUTH_ISSUER = "https://ai-auth.eterna.exchange";
+const DEFAULT_MCP_ENDPOINT = "https://mcp.eterna.exchange";
 
 export interface EternaConfig {
   endpoint: string;
@@ -23,6 +24,10 @@ export function getConfigDir(): string {
 
 export function getAuthIssuer(): string {
   return process.env.ETERNA_AUTH_ISSUER ?? AUTH_ISSUER;
+}
+
+export function getMcpEndpoint(): string {
+  return process.env.ETERNA_MCP_URL ?? DEFAULT_MCP_ENDPOINT;
 }
 
 function ensureConfigDir(): void {

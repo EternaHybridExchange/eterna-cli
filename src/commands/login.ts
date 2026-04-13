@@ -4,6 +4,7 @@ import { localhostAuthFlow } from "../auth/localhost-flow.js";
 import { deviceCodeFlow } from "../auth/device-flow.js";
 import { TokenManager } from "../auth/token-manager.js";
 import { readConfig } from "../auth/config.js";
+import { linkLegacyKey } from "../auth/link-legacy-key.js";
 import { startSpinner, stopSpinner } from "../util/spinner.js";
 
 const CLIENT_ID = "eterna-cli";
@@ -53,6 +54,11 @@ async function loginWithLocalhost(
     });
 
     console.log("Logged in successfully!");
+
+    const legacyKey = process.env.ETERNA_MCP_KEY;
+    if (legacyKey) {
+      await linkLegacyKey(tokens.access_token, legacyKey);
+    }
   } catch (err) {
     stopSpinner(false, "Authentication failed");
     console.error((err as Error).message);
@@ -88,6 +94,11 @@ async function loginWithDeviceCode(
     });
 
     console.log("Logged in successfully!");
+
+    const legacyKey = process.env.ETERNA_MCP_KEY;
+    if (legacyKey) {
+      await linkLegacyKey(tokens.access_token, legacyKey);
+    }
   } catch (err) {
     console.error(`Authentication failed: ${(err as Error).message}`);
     process.exitCode = 1;
