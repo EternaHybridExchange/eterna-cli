@@ -69,12 +69,13 @@ Override the config directory with the `ETERNA_CONFIG_DIR` environment variable.
 
 ## Environment Variables
 
-| Variable             | Description                    | Default                           |
-| -------------------- | ------------------------------ | --------------------------------- |
-| `ETERNA_ENDPOINT`    | API endpoint URL               | `https://ai-api.eterna.exchange`  |
-| `ETERNA_AUTH_ISSUER` | OAuth authorization server URL | `https://ai-auth.eterna.exchange` |
-| `ETERNA_MCP_URL`     | MCP gateway URL                | `https://mcp.eterna.exchange`     |
-| `ETERNA_CONFIG_DIR`  | Config/credentials directory   | `~/.eterna`                       |
+| Variable             | Description                                                                                   | Default                           |
+| -------------------- | --------------------------------------------------------------------------------------------- | --------------------------------- |
+| `ETERNA_ENDPOINT`    | API endpoint URL                                                                              | `https://ai-api.eterna.exchange`  |
+| `ETERNA_AUTH_ISSUER` | OAuth authorization server URL                                                                | `https://ai-auth.eterna.exchange` |
+| `ETERNA_MCP_URL`     | MCP gateway URL                                                                               | `https://mcp.eterna.exchange`     |
+| `ETERNA_CONFIG_DIR`  | Config/credentials directory                                                                  | `~/.eterna`                       |
+| `ETERNA_MCP_KEY`     | Legacy mcp-gateway API key — if set, `eterna login` links it to your OAuth identity automatically, preserving your existing Bybit subaccount | _(none)_ |
 
 ## License
 
