@@ -67,6 +67,24 @@ Config is stored in `~/.eterna/config.json`:
 
 Override the config directory with the `ETERNA_CONFIG_DIR` environment variable.
 
+## Environment Variables
+
+| Variable | Description | Default |
+| --- | --- | --- |
+| `ETERNA_ENDPOINT` | API endpoint URL | `https://ai-api.eterna.exchange` |
+| `ETERNA_AUTH_ISSUER` | OAuth authorization server URL | `https://ai-auth.eterna.exchange` |
+| `ETERNA_MCP_URL` | MCP gateway URL | `https://mcp.eterna.exchange` |
+| `ETERNA_CONFIG_DIR` | Config/credentials directory | `~/.eterna` |
+
+To use the staging environment:
+
+```bash
+export ETERNA_AUTH_ISSUER=https://ai-auth.staging.eterna.exchange
+export ETERNA_ENDPOINT=https://ai-api.staging.eterna.exchange
+export ETERNA_MCP_URL=https://mcp.staging.eterna.exchange
+eterna login
+```
+
 ## License
 
 MIT
