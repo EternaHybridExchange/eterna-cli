@@ -5,34 +5,34 @@ CLI for [Eterna Exchange](https://eterna.exchange) — execute AI trading strate
 ## Install
 
 ```bash
-npx eterna --help
+npx @eterna-hybrid-exchange/cli --help
 ```
 
 Or install globally:
 
 ```bash
-npm install -g eterna
+npm install -g @eterna-hybrid-exchange/cli
 ```
 
 ## Quick Start
 
 ```bash
 # Authenticate (opens browser or shows device code for SSH)
-npx eterna login
+npx @eterna-hybrid-exchange/cli login
 
 # Execute a strategy file
-npx eterna execute strategy.ts
+npx @eterna-hybrid-exchange/cli execute strategy.ts
 
 # Pipe code via stdin
-echo 'const balance = await eterna.getBalance(); return balance;' | npx eterna execute -
+echo 'const balance = await eterna.getBalance(); return balance;' | npx @eterna-hybrid-exchange/cli execute -
 
 # Check balance and positions
-npx eterna balance
-npx eterna positions
+npx @eterna-hybrid-exchange/cli balance
+npx @eterna-hybrid-exchange/cli positions
 
 # Browse the SDK
-npx eterna sdk --search "place order"
-npx eterna sdk --detail full
+npx @eterna-hybrid-exchange/cli sdk --search "place order"
+npx @eterna-hybrid-exchange/cli sdk --detail full
 ```
 
 ## Commands
