@@ -33,6 +33,9 @@ function ensureConfigDir(): void {
 }
 
 export function readConfig(): EternaConfig {
+  if (process.env.ETERNA_ENDPOINT) {
+    return { endpoint: process.env.ETERNA_ENDPOINT };
+  }
   const configPath = path.join(getConfigDir(), "config.json");
   try {
     const raw = fs.readFileSync(configPath, "utf-8");
