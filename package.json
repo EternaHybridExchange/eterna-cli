@@ -1,6 +1,6 @@
 {
   "name": "@eterna-hybrid-exchange/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Eterna CLI — execute trading strategies from your terminal",
   "type": "module",
   "bin": {
