@@ -42,7 +42,7 @@ export const executeCommand = new Command("execute")
     }
 
     const client = new ApiClient();
-    const spinner = startSpinner("Executing...");
+    startSpinner("Executing...");
 
     try {
       const result = await client.execute(code);

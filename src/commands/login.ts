@@ -36,7 +36,7 @@ async function loginWithLocalhost(
   resource: string,
   tokenManager: TokenManager,
 ): Promise<void> {
-  const spinner = startSpinner("Opening browser for authentication...");
+  startSpinner("Opening browser for authentication...");
 
   try {
     stopSpinner(undefined);

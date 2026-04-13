@@ -7,7 +7,7 @@ export const balanceCommand = new Command("balance")
   .description("Get your account balance")
   .action(async () => {
     const client = new ApiClient();
-    const spinner = startSpinner("Fetching balance...");
+    startSpinner("Fetching balance...");
 
     try {
       const result = await client.execute(

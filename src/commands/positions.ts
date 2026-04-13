@@ -7,7 +7,7 @@ export const positionsCommand = new Command("positions")
   .description("Get your open positions")
   .action(async () => {
     const client = new ApiClient();
-    const spinner = startSpinner("Fetching positions...");
+    startSpinner("Fetching positions...");
 
     try {
       const result = await client.execute(
