@@ -4,7 +4,6 @@ import * as os from "node:os";
 
 const DEFAULT_ENDPOINT = "https://ai-api.eterna.exchange";
 const AUTH_ISSUER = "https://ai-auth.eterna.exchange";
-const DEFAULT_MCP_ENDPOINT = "https://mcp.eterna.exchange";
 
 export interface EternaConfig {
   endpoint: string;
