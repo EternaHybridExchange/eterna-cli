@@ -4,7 +4,6 @@ import * as os from "node:os";
 
 const DEFAULT_ENDPOINT = "https://ai-api.eterna.exchange";
 const AUTH_ISSUER = "https://ai-auth.eterna.exchange";
-const DEFAULT_MCP_ENDPOINT = "https://mcp.eterna.exchange";
 
 export interface EternaConfig {
   endpoint: string;
@@ -27,12 +26,12 @@ export function getAuthIssuer(): string {
 }
 
 export function getMcpEndpoint(): string {
-  if (process.env.ETERNA_MCP_URL) return process.env.ETERNA_MCP_URL;
-  // Derive from ETERNA_ENDPOINT so staging users don't need a separate var.
-  // https://ai-api.eterna.exchange → https://mcp.eterna.exchange
-  // https://ai-api.staging.eterna.exchange → https://mcp.staging.eterna.exchange
-  const endpoint = process.env.ETERNA_ENDPOINT ?? DEFAULT_ENDPOINT;
-  return endpoint.replace("ai-api.", "mcp.");
+  const raw = process.env.ETERNA_MCP_URL
+    ?? (process.env.ETERNA_ENDPOINT ?? DEFAULT_ENDPOINT).replace("ai-api.", "mcp.");
+  // Strip trailing /mcp if present — users sometimes copy the full MCP protocol
+  // URL from their Claude config (e.g. https://mcp.eterna.exchange/mcp), but
+  // REST endpoints like /migrate/link-legacy-key live at the base URL.
+  return raw.replace(/\/mcp$/, "");
 }
 
 function ensureConfigDir(): void {
