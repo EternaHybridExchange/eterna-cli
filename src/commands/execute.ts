@@ -22,15 +22,20 @@ async function readStdin(): Promise<string> {
 export const executeCommand = new Command("execute")
   .description("Execute trading code in the Eterna sandbox")
   .argument("[file]", "TypeScript file to execute, or - for stdin")
-  .action(async (file?: string) => {
+  .option("-e, --eval <code>", "Execute inline code instead of a file")
+  .action(async (file: string | undefined, opts: { eval?: string }) => {
     let code: string;
 
-    if (file === "-" || (!file && !process.stdin.isTTY)) {
+    if (opts.eval) {
+      code = opts.eval;
+    } else if (file === "-" || (!file && !process.stdin.isTTY)) {
       code = await readStdin();
     } else if (file) {
       code = await readCodeFromFile(file);
     } else {
-      console.error("Usage: eterna execute <file.ts> or pipe code via stdin");
+      console.error(
+        "Usage: eterna execute <file.ts>, eterna execute -e '<code>', or pipe via stdin",
+      );
       process.exitCode = 1;
       return;
     }

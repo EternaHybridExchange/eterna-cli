@@ -5,6 +5,7 @@ import { executeCommand } from "./commands/execute.js";
 import { sdkCommand } from "./commands/sdk.js";
 import { balanceCommand } from "./commands/balance.js";
 import { positionsCommand } from "./commands/positions.js";
+import { statusCommand } from "./commands/status.js";
 
 const program = new Command();
 
@@ -15,6 +16,7 @@ program
 
 program.addCommand(loginCommand);
 program.addCommand(logoutCommand);
+program.addCommand(statusCommand);
 program.addCommand(executeCommand);
 program.addCommand(sdkCommand);
 program.addCommand(balanceCommand);
