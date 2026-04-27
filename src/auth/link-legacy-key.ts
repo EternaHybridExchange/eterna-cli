@@ -35,8 +35,14 @@ export async function linkLegacyKey(
   }
 
   if (res.ok) {
-    const data = LinkResultSchema.parse(await res.json());
-    if (data.linked) {
+    const result = LinkResultSchema.safeParse(await res.json());
+    if (!result.success) {
+      console.warn(
+        "Warning: Unexpected response from mcp-gateway link endpoint",
+      );
+      return;
+    }
+    if (result.data.linked) {
       console.log(
         `✓ Legacy account linked — existing Bybit subaccount preserved`,
       );
