@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.3.0](https://github.com/EternaHybridExchange/eterna-cli/compare/v0.2.2...v0.3.0) (2026-04-27)
+
+
+### Features
+
+* add `eterna status` command to show auth state ([40af5da](https://github.com/EternaHybridExchange/eterna-cli/commit/40af5da90c844d3ef79ed98a98ebeb9e8b9381e7))
+* add inline code execution via `-e`/`--eval` flag ([9b9675d](https://github.com/EternaHybridExchange/eterna-cli/commit/9b9675d2a031d70144469c364b9cb597839b5301))
+
+
+### Bug Fixes
+
+* address CLI QA feedback ([e44a6e0](https://github.com/EternaHybridExchange/eterna-cli/commit/e44a6e02eefd2c4aabab2ef54cfd8cfff44f56a4))
+* parse JSON error bodies in execute API failures ([4c1e2ca](https://github.com/EternaHybridExchange/eterna-cli/commit/4c1e2ca218430a0d66cdae428c886b0fe8aac527))
+* style OAuth callback page to match ai-auth design ([f952885](https://github.com/EternaHybridExchange/eterna-cli/commit/f95288587075a8fe04739be2095027cd4820c391))
+
 ## [0.2.2](https://github.com/EternaHybridExchange/eterna-cli/compare/v0.2.1...v0.2.2) (2026-04-14)
 
 
