@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.1](https://github.com/EternaHybridExchange/eterna-cli/compare/v0.3.0...v0.3.1) (2026-04-27)
+
+
+### Bug Fixes
+
+* combine release-please and publish into single workflow ([5df98c3](https://github.com/EternaHybridExchange/eterna-cli/commit/5df98c37bfa8fc57115ad3ef84e6e1bcfe01daa8))
+* combine release-please and publish into single workflow ([dd61032](https://github.com/EternaHybridExchange/eterna-cli/commit/dd610327acdc8aee6092b90407af55952d1844e2))
+* **link-legacy-key:** use safeParse to prevent unhandled ZodError ([cc8131e](https://github.com/EternaHybridExchange/eterna-cli/commit/cc8131e6e7c03fcbb3eb311ade5ef385309280f5))
+* **link-legacy-key:** validate response with Zod and add fetch timeout ([f64ac04](https://github.com/EternaHybridExchange/eterna-cli/commit/f64ac04a02300fcc4f0876ce8eb7e607c5922522))
+* **link-legacy-key:** validate response with Zod and add fetch timeout ([ee8dd24](https://github.com/EternaHybridExchange/eterna-cli/commit/ee8dd2442bcc7c48492fb13f4a4782c65ce1c10d))
+
 ## [0.3.0](https://github.com/EternaHybridExchange/eterna-cli/compare/v0.2.2...v0.3.0) (2026-04-27)
 
 
