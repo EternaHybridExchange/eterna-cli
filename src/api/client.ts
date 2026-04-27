@@ -62,14 +62,25 @@ export class ApiClient {
         body: JSON.stringify({ code }),
       });
       if (!retryRes.ok) {
-        throw new Error(`Execution failed: ${retryRes.statusText}`);
+        const errBody = await retryRes.text();
+        throw new Error(`Execution failed (${retryRes.status}): ${errBody}`);
       }
       return retryRes.json() as Promise<ExecutionResult>;
     }
 
     if (!res.ok) {
       const errBody = await res.text();
-      throw new Error(`Execution failed (${res.status}): ${errBody}`);
+      let detail = errBody;
+      try {
+        const parsed = JSON.parse(errBody) as Record<string, unknown>;
+        detail = (parsed.error as string)
+          ?? (parsed.message as string)
+          ?? (parsed.detail as string)
+          ?? errBody;
+      } catch { /* use raw body */ }
+      throw new Error(
+        `Execution failed (${res.status}): ${detail}`,
+      );
     }
 
     return res.json() as Promise<ExecutionResult>;
