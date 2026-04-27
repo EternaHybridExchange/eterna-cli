@@ -1,10 +1,7 @@
 import { getMcpEndpoint } from "./config.js";
+import { LinkResultSchema } from "./validation.js";
 
-interface LinkResult {
-  linked: boolean;
-  agentName: string;
-  bybitSubMemberId: string | null;
-}
+const LINK_TIMEOUT_MS = 10_000;
 
 /**
  * Links a legacy mcp-gateway API key to the caller's OAuth identity.
@@ -28,6 +25,7 @@ export async function linkLegacyKey(
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ legacyApiKey }),
+      signal: AbortSignal.timeout(LINK_TIMEOUT_MS),
     });
   } catch {
     console.warn(
@@ -37,8 +35,14 @@ export async function linkLegacyKey(
   }
 
   if (res.ok) {
-    const data = (await res.json()) as LinkResult;
-    if (data.linked) {
+    const result = LinkResultSchema.safeParse(await res.json());
+    if (!result.success) {
+      console.warn(
+        "Warning: Unexpected response from mcp-gateway link endpoint",
+      );
+      return;
+    }
+    if (result.data.linked) {
       console.log(
         `✓ Legacy account linked — existing Bybit subaccount preserved`,
       );
